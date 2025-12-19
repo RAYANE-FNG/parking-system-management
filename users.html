@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Utilisateurs - Parking Management</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+    <div class="app-layout">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h2>Parking</h2>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="dashboard.html" class="nav-item">
+                    <span>Dashboard</span>
+                </a>
+                <a href="reservations.html" class="nav-item">
+                    <span>Réservations</span>
+                </a>
+                <a href="places.html" class="nav-item">
+                    <span>Places</span>
+                </a>
+                <a href="users.html" class="nav-item active">
+                    <span>Utilisateurs</span>
+                </a>
+                <a href="payments.html" class="nav-item">
+                    <span>Paiements</span>
+                </a>
+            </nav>
+        </aside>
+        
+        <main class="main-content">
+            <header class="top-bar">
+                <h1>Utilisateurs</h1>
+                <div class="top-bar-actions">
+                    <span id="userEmail"></span>
+                    <button id="logoutBtn" class="btn btn-secondary">Déconnexion</button>
+                </div>
+            </header>
+            
+            <div class="content-area">
+                <div class="toolbar">
+                    <button id="addBtn" class="btn btn-primary">Nouvel Utilisateur</button>
+                    <div class="search-filter">
+                        <input type="text" id="searchInput" placeholder="Rechercher...">
+                        <select id="roleFilter">
+                            <option value="">Tous les rôles</option>
+                            <option value="admin">Admin</option>
+                            <option value="user">User</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Nom</th>
+                                <th>Email</th>
+                                <th>Téléphone</th>
+                                <th>Rôle</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tableBody"></tbody>
+                    </table>
+                </div>
+            </div>
+        </main>
+    </div>
+    
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modalTitle">Nouvel Utilisateur</h2>
+                <button class="modal-close">&times;</button>
+            </div>
+            <form id="userForm">
+                <input type="hidden" id="userId">
+                
+                <div class="form-group">
+                    <label for="name">Nom</label>
+                    <input type="text" id="name" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="password">Mot de passe</label>
+                    <input type="password" id="password">
+                    <small>Laissez vide pour ne pas modifier</small>
+                </div>
+                
+                <div class="form-group">
+                    <label for="phone">Téléphone</label>
+                    <input type="tel" id="phone" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="role">Rôle</label>
+                    <select id="role" required>
+                        <option value="user">User</option>
+                        <option value="admin">Admin</option>
+                    </select>
+                </div>
+                
+                <div class="modal-actions">
+                    <button type="button" class="btn btn-secondary modal-close">Annuler</button>
+                    <button type="submit" class="btn btn-primary">Enregistrer</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    <script src="assets/js/data.js"></script>
+    <script src="assets/js/users.js"></script>
+</body>
+</html>
