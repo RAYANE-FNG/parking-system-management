@@ -1,120 +1,191 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mes Réservations - Parking</title>
-  <link rel="stylesheet" href="assets/css/style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mes Réservations - Parking</title>
+    <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
-
-<div class="app-layout">
-  <aside class="sidebar">
-    <div class="sidebar-header">
-      <h2>Parking</h2>
-    </div>
-    <nav class="sidebar-nav">
-      <a href="user-dashboard.html" class="nav-item active">
-        <span>Mes Réservations</span>
-      </a>
-    </nav>
-  </aside>
-
-  <main class="main-content">
-    <header class="top-bar">
-      <h1>Mes Réservations</h1>
-      <div class="top-bar-actions">
-        <span id="userEmail"></span>
-        <button id="logoutBtn" class="btn btn-secondary">Déconnexion</button>
-      </div>
-    </header>
-
-    <div class="content-area">
-      <div class="toolbar">
-        <button id="newReservationBtn" class="btn btn-primary">Nouvelle Réservation</button>
-      </div>
-
-      <div class="reservations-grid">
-        <div id="reservationsList"></div>
-      </div>
-    </div>
-  </main>
-</div>
-
-<!-- MODAL RESERVATION -->
-<div id="placeSelectorModal" class="modal">
-  <div class="modal-content modal-large">
-    <div class="modal-header">
-      <h2>Choisir une Place de Parking</h2>
-      <button class="modal-close">&times;</button>
-    </div>
-
-    <div class="modal-body">
-      <form id="reservationForm">
-
-        <div class="form-section">
-          <h3>Informations de réservation</h3>
-
-          <div class="form-group">
-            <label for="matricule">Matricule du véhicule</label>
-            <input type="text" id="matricule" required>
-          </div>
-
-          <div class="form-row">
-            <div class="form-group">
-              <label for="arrivalTime">Heure d'arrivée</label>
-              <input type="datetime-local" id="arrivalTime" required>
+    <div class="app-layout">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h2>Parking</h2>
             </div>
-            <div class="form-group">
-              <label for="departureTime">Heure de sortie</label>
-              <input type="datetime-local" id="departureTime" required>
+            <nav class="sidebar-nav">
+                <a href="user-dashboard.html" class="nav-item active">
+                    <span>Mes Réservations</span>
+                </a>
+            </nav>
+        </aside>
+        
+        <main class="main-content">
+            <header class="top-bar">
+                <h1>Mes Réservations</h1>
+                <div class="top-bar-actions">
+                    <span id="userEmail"></span>
+                    <button id="logoutBtn" class="btn btn-secondary">Déconnexion</button>
+                </div>
+            </header>
+            
+            <div class="content-area">
+                <div class="toolbar">
+                    <button id="newReservationBtn" class="btn btn-primary">Nouvelle Réservation</button>
+                </div>
+                
+                <div class="reservations-grid">
+                    <div id="reservationsList"></div>
+                </div>
             </div>
-          </div>
-
-          <div class="estimated-cost">
-            <strong>Coût estimé :</strong>
-            <span id="estimatedCost">0.00</span> €
-          </div>
+        </main>
+    </div>
+    
+    <div id="placeSelectorModal" class="modal">
+        <div class="modal-content modal-large">
+            <div class="modal-header">
+                <h2>Choisir une Place de Parking</h2>
+                <button class="modal-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="reservationForm">
+                    <div class="form-section">
+                        <h3>Informations de réservation</h3>
+                        
+                        <div class="form-group">
+                            <label for="matricule">Matricule du véhicule</label>
+                            <input type="text" id="matricule" required placeholder="Ex: ABC123">
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="arrivalTime">Heure d'arrivée</label>
+                                <input type="datetime-local" id="arrivalTime" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="departureTime">Heure de sortie</label>
+                                <input type="datetime-local" id="departureTime" required>
+                            </div>
+                        </div>
+                        
+                        <div class="estimated-cost">
+                            <strong>Coût estimé:</strong> <span id="estimatedCost">0.00</span> €
+                        </div>
+                    </div>
+                    
+                    <div class="form-section">
+                        <h3>Sélectionner une place</h3>
+                        
+                        <div class="filter-tabs">
+                            <button type="button" class="filter-tab active" data-filter="all">Toutes</button>
+                            <button type="button" class="filter-tab" data-filter="available">Disponibles</button>
+                            <button type="button" class="filter-tab" data-filter="standard">Standard</button>
+                            <button type="button" class="filter-tab" data-filter="electric">Électrique</button>
+                            <button type="button" class="filter-tab" data-filter="handicap">PMR</button>
+                        </div>
+                        
+                        <div class="parking-legend">
+                            <div class="legend-item">
+                                <div class="place-preview place-available"></div>
+                                <span>Disponible</span>
+                            </div>
+                            <div class="legend-item">
+                                <div class="place-preview place-occupied"></div>
+                                <span>Occupée</span>
+                            </div>
+                            <div class="legend-item">
+                                <div class="place-preview place-selected"></div>
+                                <span>Sélectionnée</span>
+                            </div>
+                        </div>
+                        
+                        <div id="parkingGrid" class="parking-grid"></div>
+                    </div>
+                    
+                    <div class="modal-actions">
+                        <button type="button" class="btn btn-secondary modal-close">Annuler</button>
+                        <button type="submit" class="btn btn-primary" id="confirmReservationBtn" disabled>Confirmer et Payer</button>
+                    </div>
+                </form>
+            </div>
         </div>
-
-        <div class="form-section">
-          <h3>Sélectionner une place</h3>
-
-          <!-- 🔥 FILTRES DYNAMIQUES -->
-          <div class="filter-tabs" id="categoryTabs">
-            <!-- JS -->
-          </div>
-
-          <div class="parking-legend">
-            <div class="legend-item">
-              <div class="place-preview place-available"></div>
-              <span>Disponible</span>
-            </div>
-            <div class="legend-item">
-              <div class="place-preview place-occupied"></div>
-              <span>Occupée</span>
-            </div>
-            <div class="legend-item">
-              <div class="place-preview place-selected"></div>
-              <span>Sélectionnée</span>
-            </div>
-          </div>
-
-          <div id="parkingGrid" class="parking-grid"></div>
-        </div>
-
-        <div class="modal-actions">
-          <button type="button" class="btn btn-secondary modal-close">Annuler</button>
-          <button type="submit" class="btn btn-primary" id="confirmReservationBtn" disabled>
-            Confirmer et Payer
-          </button>
-        </div>
-      </form>
     </div>
-  </div>
-</div>
-
-<script src="assets/js/data.js"></script>
-<script src="assets/js/user-dashboard.js"></script>
+    
+    <div id="paymentModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Paiement</h2>
+                <button class="modal-close payment-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="payment-summary">
+                    <h3>Récapitulatif</h3>
+                    <div class="summary-item">
+                        <span>Place:</span>
+                        <strong id="summaryPlace"></strong>
+                    </div>
+                    <div class="summary-item">
+                        <span>Matricule:</span>
+                        <strong id="summaryMatricule"></strong>
+                    </div>
+                    <div class="summary-item">
+                        <span>Arrivée:</span>
+                        <strong id="summaryArrival"></strong>
+                    </div>
+                    <div class="summary-item">
+                        <span>Sortie:</span>
+                        <strong id="summaryDeparture"></strong>
+                    </div>
+                    <div class="summary-item summary-total">
+                        <span>Montant à payer:</span>
+                        <strong id="summaryAmount"></strong>
+                    </div>
+                </div>
+                
+                <form id="paymentForm">
+                    <div class="form-group">
+                        <label>Méthode de paiement</label>
+                        <div class="payment-methods">
+                            <label class="payment-method">
+                                <input type="radio" name="paymentMethod" value="card" checked>
+                                <span>Carte bancaire</span>
+                            </label>
+                            <label class="payment-method">
+                                <input type="radio" name="paymentMethod" value="cash">
+                                <span>Espèces</span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div id="cardDetails" class="card-details">
+                        <div class="form-group">
+                            <label for="cardNumber">Numéro de carte</label>
+                            <input type="text" id="cardNumber" placeholder="1234 5678 9012 3456" maxlength="19">
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="cardExpiry">Date d'expiration</label>
+                                <input type="text" id="cardExpiry" placeholder="MM/AA" maxlength="5">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="cardCvv">CVV</label>
+                                <input type="text" id="cardCvv" placeholder="123" maxlength="3">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="modal-actions">
+                        <button type="button" class="btn btn-secondary payment-close">Annuler</button>
+                        <button type="submit" class="btn btn-success">Payer</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+    <script src="assets/js/data.js"></script>
+    <script src="assets/js/user-dashboard.js"></script>
 </body>
 </html>
