@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Places - Parking Management</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+<div class="app-layout">
+
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            <h2>Parking</h2>
+        </div>
+        <nav class="sidebar-nav">
+            <a href="dashboard.html" class="nav-item">
+                <span>Dashboard</span>
+            </a>
+            <a href="reservations.html" class="nav-item">
+                <span>Réservations</span>
+            </a>
+            <a href="places.html" class="nav-item active">
+                <span>Places</span>
+            </a>
+            <a href="users.html" class="nav-item">
+                <span>Utilisateurs</span>
+            </a>
+            <a href="payments.html" class="nav-item">
+                <span>Paiements</span>
+            </a>
+            <a href="categories.html" class="nav-item">
+                <span>Catégories</span>
+            </a>
+        </nav>
+    </aside>
+
+    <main class="main-content">
+        <header class="top-bar">
+            <h1>Places de Parking</h1>
+            <div class="top-bar-actions">
+                <span id="userEmail"></span>
+                <button id="logoutBtn" class="btn btn-secondary">Déconnexion</button>
+            </div>
+        </header>
+
+        <div class="content-area">
+            <div class="toolbar">
+                <button id="addBtn" class="btn btn-primary">Nouvelle Place</button>
+                <div class="search-filter">
+                    <input type="text" id="searchInput" placeholder="Rechercher...">
+                    <select id="statusFilter">
+                        <option value="">Tous les statuts</option>
+                        <option value="available">Disponible</option>
+                        <option value="occupied">Occupée</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="table-container">
+                <table>
+                    <thead>
+                    <tr>
+                        <th>Numéro</th>
+                        <th>Type</th>
+                        <th>Étage</th>
+                        <th>Prix/heure</th>
+                        <th>Statut</th>
+                        <th>Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody id="tableBody"></tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+</div>
+
+<!-- MODAL -->
+<div id="modal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2 id="modalTitle">Nouvelle Place</h2>
+            <button class="modal-close">&times;</button>
+        </div>
+
+        <form id="placeForm">
+            <input type="hidden" id="placeId">
+
+            <div class="form-group">
+                <label for="number">Numéro</label>
+                <input type="text" id="number" required>
+            </div>
+
+            <div class="form-group">
+                <label for="type">Catégorie</label>
+                <select id="type" required>
+                    <option value="">-- Choisir une catégorie --</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="floor">Étage</label>
+                <input type="text" id="floor" required>
+            </div>
+
+            <div class="form-group">
+                <label for="pricePerHour">Prix par heure (€)</label>
+                <input type="number" id="pricePerHour" step="0.01" required>
+            </div>
+
+            <div class="form-group">
+                <label for="status">Statut</label>
+                <select id="status" required>
+                    <option value="available">Disponible</option>
+                    <option value="occupied">Occupée</option>
+                </select>
+            </div>
+
+            <div class="modal-actions">
+                <button type="button" class="btn btn-secondary modal-close">Annuler</button>
+                <button type="submit" class="btn btn-primary">Enregistrer</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script src="assets/js/data.js"></script>
+<script src="assets/js/places.js"></script>
+</body>
+</html>

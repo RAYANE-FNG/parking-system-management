@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Gestion des catégories</title>
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+<div class="app-layout">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sidebar-header">
+        <h2>Parking</h2>
+    </div>
+    <nav class="sidebar-nav">
+        <a href="dashboard.html" class="nav-item active">
+            <span>Dashboard</span>
+        </a>
+        <a href="reservations.html" class="nav-item">
+            <span>Réservations</span>
+        </a>
+        <a href="places.html" class="nav-item">
+            <span>Places</span>
+        </a>
+        <a href="users.html" class="nav-item">
+            <span>Utilisateurs</span>
+        </a>
+        <a href="payments.html" class="nav-item">
+            <span>Paiements</span>
+        </a>
+        <a href="categories.html" class="nav-item">
+            <span>Catégories</span>
+        </a>
+    </nav>
+</aside>
+
+  <!-- MAIN -->
+  <div class="main-content">
+
+    <!-- TOP BAR -->
+    <header class="top-bar">
+      <h1>Gestion des catégories</h1>
+    </header>
+
+    <!-- CONTENT -->
+    <main class="content-area">
+
+      <!-- TOOLBAR -->
+      <div class="toolbar">
+        <form id="categoryForm" class="search-filter">
+          <input type="text" id="name" placeholder="Nom de la catégorie" required>
+          <button class="btn btn-primary">Ajouter</button>
+        </form>
+      </div>
+
+      <!-- TABLE -->
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>Catégorie</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="categoryList">
+            <!-- JS -->
+          </tbody>
+        </table>
+      </div>
+
+    </main>
+  </div>
+
+</div>
+
+<script src="assets/js/categories.js"></script>
+</body>
+</html>
